@@ -5,10 +5,10 @@ See the file LICENSE for copying permission.
 =end
 
 require "command-designer/command"
-require "command-designer/context"
+require "context-filters"
 
-# Add support for +command+ in +Context+
-class CommandDesigner::Dsl < CommandDesigner::Context
+# Add support for +command+ in +Context+ using +Filters+
+class CommandDesigner::Dsl < ContextFilters::Context
 
   # evaluates the given command_name in current context (applies matching filters)
   # @param command_name [String] the command name to evaluate

@@ -11,19 +11,8 @@
 
 Build command text based on multiple filters
 
-## Content
-
-This gem contains two helper classes that are not connected but fully
-compatible, you can use them together to allow building advanced
-commands using filters (like server / server group).
-
 ## Command
 
 `CommandDesigner::Command` is a simple implementation with string value -
 the `command_name` and a callback function allowing to change it.
 
-## Filters
-
-`CommandDesigner::Filters` allows storing and applying filters,
-the filters can be anything, most convienient an object instance or
-hash of options.
