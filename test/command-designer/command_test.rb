@@ -15,7 +15,7 @@ describe CommandDesigner::Command do
   it "initializes command" do
     subject.send(:initialize, "true")
     subject.command_name.must_equal("true")
-    subject.initial_command_name.must_equal("true")
+    subject.initial_command_name.must_equal(["true"])
   end
 
   it "builds and resets the command" do
