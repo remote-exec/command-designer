@@ -18,21 +18,21 @@ require "command-designer/version"
 class CommandDesigner::Command
 
   # @return [String] current value of the command
-  attr_reader :command_name
+  attr_reader :command
 
   # @return [Array] initial value of the command and parameters
-  attr_reader :initial_command_name
+  attr_reader :initial_command
 
   # initialize command and initila command name
   # @param command_name [String] The command name to build upon
   def initialize(*args)
-    @initial_command_name = args || []
+    @initial_command = args || []
     reset
   end
 
   # reset command to it's initial state
   def reset
-    @command_name = Shellwords.join(@initial_command_name)
+    @command = Shellwords.join(@initial_command)
   end
 
   # Yields a block to change the command_name
@@ -40,7 +40,7 @@ class CommandDesigner::Command
   # @yieldparam command_name [String] the current command
   # @return     [String] the new command
   def change(&block)
-    @command_name = yield @command_name
+    @command = yield @command
   end
 
 end
