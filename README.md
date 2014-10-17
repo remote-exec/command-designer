@@ -11,8 +11,37 @@
 
 Build command text based on multiple filters
 
-## Command
+## About
 
-`CommandDesigner::Command` is a simple implementation with string value -
-the `command_name` and a callback function allowing to change it.
+This is framework to build command strings based on current context.
 
+### DSL Methods
+
+- `initialize(priorities_array)` - sets up initial context, execute all
+  methods on this instance
+- `filter(priority, options) { code }` - create priority based filter
+  for given options with the code bloc to execute
+- `local_filter(filter_block) { code }` - define local `filter_block` to
+  take effect for the given `code` block, it's tricky as it takes two
+  lambdas, try: `local_filter(Proc.new{|cmd| "cd path && #{cmd}"}) { code }`
+- `in_context(options) { code }` - build new context, options are for
+  matching filters, all code will be executes in context of given options
+- `command(name, *args)` - build command by evaluate global and local filters
+  in the order of given priority, local filters are called after the `nil`
+  priority, try priorities: `[:first, nil, :last]`
+
+### Example
+
+```ruby
+subject = CommandDesigner::Dsl.new([:first, nil, :last])
+
+subject.filter(:first, {:target => "true"}) {|cmd| "env #{cmd}" }
+
+subject.local_filter(Proc.new{|cmd| "cd /path && #{cmd}" }) do
+
+  subject.command("true")  # => "cd /path && env true"
+
+  subject.command("false") # => "cd /path && false"
+
+end
+```
