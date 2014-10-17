@@ -18,7 +18,7 @@ This is framework to build command strings based on current context.
 ### DSL Methods
 
 - `initialize(priorities_array)` - sets up initial context, execute all
-  methods on this instance
+  methods on this instance, try priorities: `[:first, nil, :last]`
 - `filter(priority, options) { code }` - create priority based filter
   for given options with the code bloc to execute
 - `local_filter(filter_block) { code }` - define local `filter_block` to
@@ -28,7 +28,7 @@ This is framework to build command strings based on current context.
   matching filters, all code will be executes in context of given options
 - `command(name, *args)` - build command by evaluate global and local filters
   in the order of given priority, local filters are called after the `nil`
-  priority, try priorities: `[:first, nil, :last]`
+  priority or on the end
 
 ### Example
 
