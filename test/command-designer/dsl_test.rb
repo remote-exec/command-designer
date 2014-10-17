@@ -34,6 +34,12 @@ describe CommandDesigner::Dsl do
       subject.command("true")
     end
 
+    it "handles filtered targeted commands" do
+      subject.filter(nil, {:target => "true"}) do |command| "env #{command}" end
+      subject.command("false").must_equal("false")
+      subject.command("true").must_equal("env true")
+    end
+
   end #"top level"
 
 end

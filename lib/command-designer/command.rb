@@ -48,4 +48,11 @@ class CommandDesigner::Command
     @initial_command.first
   end
 
+  def ==(other)
+    if self.class === other
+    then self.command_name == other.command_name
+    else self.command_name == other
+    end
+  end
+
 end
