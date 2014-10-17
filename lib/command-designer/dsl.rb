@@ -16,7 +16,7 @@ class CommandDesigner::Dsl < ContextFilters::Context
   # @return             [String] the evaluated value of command name
   def command(command_name, *args)
     cmd = CommandDesigner::Command.new(command_name, *args)
-    evaluate_filters(cmd.method(:change))
+    evaluate_filters(cmd, :change)
     cmd.command
   end
 
