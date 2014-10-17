@@ -40,6 +40,14 @@ describe CommandDesigner::Dsl do
       subject.command("true").must_equal("env true")
     end
 
+    it "handles filtered targeted commands in context" do
+      subject.filter(nil, {:target => "true"}) do |command| "env #{command}" end
+      subject.in_context({:a=>3}) do
+        subject.command("false").must_equal("false")
+        subject.command("true").must_equal("env true")
+      end
+    end
+
   end #"top level"
 
 end
