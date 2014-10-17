@@ -48,11 +48,9 @@ class CommandDesigner::Command
     @initial_command.first
   end
 
+  # @return [Boolean] true if other object equals command_name, false otherwise
   def ==(other)
-    if self.class === other
-    then self.command_name == other.command_name
-    else self.command_name == other
-    end
+    self.command_name == other
   end
 
 end
