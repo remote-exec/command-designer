@@ -13,7 +13,7 @@ require "command-designer/version"
 #
 #   command = CommandDesigner::Command.new("test")
 #   command.change {|command| "env #{command}" }
-#   command.command_name # => "env test"
+#   command.command # => "env test"
 #
 class CommandDesigner::Command
 
@@ -23,8 +23,8 @@ class CommandDesigner::Command
   # @return [Array] initial value of the command and parameters
   attr_reader :initial_command
 
-  # initialize command and initila command name
-  # @param command_name [String] The command name to build upon
+  # initialize +command+ and +initial_command+
+  # @param args [Array<String>] The command name to build upon
   def initialize(*args)
     @initial_command = args || []
     reset
@@ -35,12 +35,17 @@ class CommandDesigner::Command
     @command = Shellwords.join(@initial_command)
   end
 
-  # Yields a block to change the command_name
-  # @yield      [command_name] a block to change the command
-  # @yieldparam command_name [String] the current command
-  # @return     [String] the new command
+  # Yields a block to change the command
+  # @yield              [command] a block to change the command
+  # @yieldparam command [String]  the current command
+  # @return             [String]  the new command
   def change(&block)
     @command = yield @command
+  end
+
+  # @return [String] just the first part of the command: +command_name+
+  def command_name
+    @initial_command.first
   end
 
 end
