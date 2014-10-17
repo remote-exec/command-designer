@@ -24,7 +24,7 @@ This is framework to build command strings based on current context.
 - `local_filter(filter_block) { code }` - define local `filter_block` to
   take effect for the given `code` block, it's tricky as it takes two
   lambdas, try: `local_filter(Proc.new{|cmd| "cd path && #{cmd}"}) { code }`
-- `in_context(options) { code }` - build new context, options are for
+- `context(options) { code }` - build new context, options are for
   matching filters, all code will be executes in context of given options
 - `command(name, *args)` - build command by evaluate global and local filters
   in the order of given priority, local filters are called after the `nil`

@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">=1.9.3"
 
-  spec.add_dependency("context-filters", "~>0.9", ">=0.9.2")
+  spec.add_dependency("context-filters", "~>0.10")
 
   spec.add_development_dependency("guard",          "~>2.6")
   spec.add_development_dependency("guard-minitest", "~>2.3")
