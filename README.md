@@ -35,13 +35,21 @@ This is framework to build command strings based on current context.
 ```ruby
 subject = CommandDesigner::Dsl.new([:first, nil, :last])
 
+subject.filter(:last,  {:server => "::2" }) {|cmd| "command #{cmd}" }
 subject.filter(:first, {:target => "true"}) {|cmd| "env #{cmd}" }
 
 subject.local_filter(Proc.new{|cmd| "cd /path && #{cmd}" }) do
 
   subject.command("true")  # => "cd /path && env true"
-
   subject.command("false") # => "cd /path && false"
+
+end
+
+subject.context(:server => "::2") do |server2|
+
+  # the :last filter with "command" was applied on the end
+  server2.command("true") # => "command env false"
+  server2.command("false") # => "command false"
 
 end
 ```
