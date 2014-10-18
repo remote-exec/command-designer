@@ -49,7 +49,8 @@ subject.context(:server => "::2") do |server2|
 
   # the :last filter with "command" was applied on the end
   server2.command("true") # => "command env false"
-  server2.command("false") # => "command false"
+  # you do not have to use the block variable, subject works fine too
+  subject.command("false") # => "command false"
 
 end
 ```
