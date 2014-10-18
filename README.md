@@ -21,11 +21,11 @@ This is framework to build command strings based on current context.
   methods on this instance, try priorities: `[:first, nil, :last]`
 - `filter(priority, options) { code }` - create priority based filter
   for given options with the code bloc to execute
+- `context(options) { code }` - build new context, options are for
+  matching filters, all code will be executes in context of given options
 - `local_filter(filter_block) { code }` - define local `filter_block` to
   take effect for the given `code` block, it's tricky as it takes two
   lambdas, try: `local_filter(Proc.new{|cmd| "cd path && #{cmd}"}) { code }`
-- `context(options) { code }` - build new context, options are for
-  matching filters, all code will be executes in context of given options
 - `command(name, *args)` - build command by evaluate global and local filters
   in the order of given priority, local filters are called after the `nil`
   priority or on the end
